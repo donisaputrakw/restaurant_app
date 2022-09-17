@@ -13,15 +13,12 @@ class _BodySection extends StatelessWidget {
             children: restaurants
                 .map(
                   (e) => ListTile(
-                    leading: Hero(
-                      tag: 'search${e.pictureId}',
-                      child: SmartNetworkImage(
-                        e.pictureId,
-                        width: Dimens.dp75,
-                        height: Dimens.dp50,
-                        fit: BoxFit.cover,
-                        radius: BorderRadius.circular(Dimens.dp8),
-                      ),
+                    leading: SmartNetworkImage(
+                      e.pictureId,
+                      width: Dimens.dp75,
+                      height: Dimens.dp50,
+                      fit: BoxFit.cover,
+                      radius: BorderRadius.circular(Dimens.dp8),
                     ),
                     title: Text(e.name),
                     subtitle: Text(e.city),
@@ -32,10 +29,7 @@ class _BodySection extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/restaurant', arguments: {
-                        'restaurant': e,
-                        'tag': 'search${e.id}',
-                      });
+                      Navigator.pushNamed(context, '/restaurant', arguments: e);
                     },
                   ),
                 )

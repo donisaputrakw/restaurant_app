@@ -67,37 +67,38 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: (_restaurants == null)
-          ? const EmptyListIllustration(
-              desc: 'check and make sure the data is available again.',
-              title: 'Oops, looks like something went wrong',
-            )
-          : (_restaurants!.isNotEmpty)
-              ? ListView(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: Dimens.defaultPadding,
-                  ),
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Dimens.defaultPadding,
-                      ),
-                      child: Text('POPULAR', style: textTheme.subtitle1),
-                    ),
-                    _PopulerRestaurantSection(restaurants: _restaurants ?? []),
-                    const SizedBox(height: Dimens.dp16),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Dimens.defaultPadding,
-                      ),
-                      child: Text('ALL RESTAURANT', style: textTheme.subtitle1),
-                    ),
-                    const SizedBox(height: Dimens.dp16),
-                    _AllRestaurantSection(restaurants: _restaurants ?? []),
-                    const SizedBox(height: Dimens.dp32),
-                  ],
-                )
-              : const ListSkeleton(),
+      body: const ListSkeleton(),
+      // (_restaurants == null)
+          // ? const EmptyListIllustration(
+          //     desc: 'check and make sure the data is available again.',
+          //     title: 'Oops, looks like something went wrong',
+          //   )
+          // : (_restaurants!.isNotEmpty)
+          //     ? ListView(
+          //         padding: const EdgeInsets.symmetric(
+          //           vertical: Dimens.defaultPadding,
+          //         ),
+          //         children: [
+          //           Padding(
+          //             padding: const EdgeInsets.symmetric(
+          //               horizontal: Dimens.defaultPadding,
+          //             ),
+          //             child: Text('POPULAR', style: textTheme.subtitle1),
+          //           ),
+          //           _PopulerRestaurantSection(restaurants: _restaurants ?? []),
+          //           const SizedBox(height: Dimens.dp16),
+          //           Padding(
+          //             padding: const EdgeInsets.symmetric(
+          //               horizontal: Dimens.defaultPadding,
+          //             ),
+          //             child: Text('ALL RESTAURANT', style: textTheme.subtitle1),
+          //           ),
+          //           const SizedBox(height: Dimens.dp16),
+          //           _AllRestaurantSection(restaurants: _restaurants ?? []),
+          //           const SizedBox(height: Dimens.dp32),
+          //         ],
+          //       )
+          //     : const ListSkeleton(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/core/core.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Skeleton extends StatelessWidget {
@@ -18,14 +19,14 @@ class Skeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-        baseColor: baseColor ?? Theme.of(context).dividerColor.withOpacity(0.2),
-        highlightColor: highlightColor ?? Theme.of(context).dividerColor,
+        baseColor: baseColor ?? Colors.grey[300]!,
+        highlightColor: highlightColor ?? Colors.grey[100]!,
         period: const Duration(seconds: 3),
         child: Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: AppColors.primaryColor.withOpacity(.3),
             borderRadius: BorderRadius.circular(radius ?? 4),
           ),
         ));
