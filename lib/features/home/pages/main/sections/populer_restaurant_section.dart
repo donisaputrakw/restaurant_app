@@ -18,7 +18,7 @@ class _PopulerRestaurantSection extends StatelessWidget {
         ),
         itemCount: populers.length,
         itemBuilder: (context, index) => CardItem(
-          city: populers[index].name,
+          city: populers[index].city,
           imageUrl: populers[index].pictureId,
           name: populers[index].name,
           rate: populers[index].rating.toString(),
@@ -26,7 +26,7 @@ class _PopulerRestaurantSection extends StatelessWidget {
             Navigator.pushNamed(
               context,
               '/restaurant',
-              arguments: restaurants[index],
+              arguments: populers[index],
             );
           },
         ),

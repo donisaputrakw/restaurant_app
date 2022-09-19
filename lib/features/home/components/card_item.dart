@@ -50,7 +50,12 @@ class CardItem extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Text(city, style: textTheme.bodyMedium),
+            Text(
+              city,
+              style: textTheme.bodyMedium,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             const Spacer(),
             Row(
               children: [
