@@ -12,7 +12,9 @@ class RestaurantPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        scrolledUnderElevation: 5,
+      ),
       body: CustomScrollView(slivers: [
         SliverToBoxAdapter(
           child: _HeadingSection(restaurant: restaurant),

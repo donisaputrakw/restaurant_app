@@ -4,4 +4,7 @@ class AppConfig {
 
   /// Transparant Status Bar
   static const bool transparentStatusBar = true;
+
+  /// API URL
+  static const String apiUrl = 'https://restaurant-api.dicoding.dev';
 }

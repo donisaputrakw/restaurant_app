@@ -2,12 +2,12 @@ part of '../page.dart';
 
 class _PopulerRestaurantSection extends StatelessWidget {
   const _PopulerRestaurantSection({required this.restaurants});
-  final List<RestaurantModel> restaurants;
+  final List<Restaurant> restaurants;
 
   @override
   Widget build(BuildContext context) {
     final populers =
-        restaurants.where((element) => element.rating >= 4.2).toList();
+        restaurants.where((element) => element.rating >= 4.5).toList();
     return SizedBox(
       height: 220,
       child: ListView.separated(
@@ -19,7 +19,7 @@ class _PopulerRestaurantSection extends StatelessWidget {
         itemCount: populers.length,
         itemBuilder: (context, index) => CardItem(
           city: populers[index].city,
-          imageUrl: populers[index].pictureId,
+          imageUrl: 'https://restaurant-api.dicoding.dev/images/medium/${populers[index].pictureId}',
           name: populers[index].name,
           rate: populers[index].rating.toString(),
           onTap: () {

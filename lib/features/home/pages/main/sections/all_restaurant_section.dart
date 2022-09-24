@@ -3,7 +3,7 @@ part of '../page.dart';
 class _AllRestaurantSection extends StatelessWidget {
   const _AllRestaurantSection({required this.restaurants});
 
-  final List<RestaurantModel> restaurants;
+  final List<Restaurant> restaurants;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class _AllRestaurantSection extends StatelessWidget {
           .map(
             (e) => CardItem(
               city: e.city,
-              imageUrl: e.pictureId,
+              imageUrl: 'https://restaurant-api.dicoding.dev/images/medium/${e.pictureId}',
               name: e.name,
               rate: e.rating.toString(),
               onTap: () {
