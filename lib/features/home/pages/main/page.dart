@@ -5,6 +5,7 @@ import 'package:restaurant_app/features/home/home.dart';
 
 part 'sections/all_restaurant_section.dart';
 part 'sections/populer_restaurant_section.dart';
+part 'sections/skeleton_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: Dimens.dp32),
                       ],
                     )
-                  : const ListSkeleton(),
+                  : const _SkeletonSection(),
         );
       },
     );

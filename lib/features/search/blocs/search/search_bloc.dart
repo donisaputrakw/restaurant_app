@@ -23,13 +23,25 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   ) async {
     try {
       emit(SearchLoading());
-      final result = await searchApiDataSource.searchRestaurants(
-        query: event.query,
-      );
-      if (result.error) {
-        emit(const SearchFailure('Data not found'));
+      if (event.query == '') {
+        emit(
+          const SearchSuccess(
+            data: SearchRestaurantsModel(
+              error: false,
+              restaurants: [],
+              founded: 0,
+            ),
+          ),
+        );
       } else {
-        emit(SearchSuccess(data: result));
+        final result = await searchApiDataSource.searchRestaurants(
+          query: event.query,
+        );
+        if (result.error) {
+          emit(const SearchFailure('Data not found'));
+        } else {
+          emit(SearchSuccess(data: result));
+        }
       }
     } catch (exception, stackTrace) {
       emit(

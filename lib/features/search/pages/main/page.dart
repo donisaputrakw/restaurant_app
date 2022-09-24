@@ -4,6 +4,7 @@ import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/search/search.dart';
 
 part 'sections/body_section.dart';
+part 'sections/skeleton_section.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -17,12 +18,19 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
+    context.read<SearchBloc>().add(
+          SearchRestaurantEvent(query: _searchController.text),
+        );
+    _addListener();
+    super.initState();
+  }
+
+  void _addListener() {
     _searchController.addListener(
       () => context.read<SearchBloc>().add(
             SearchRestaurantEvent(query: _searchController.text),
           ),
     );
-    super.initState();
   }
 
   @override
@@ -45,8 +53,16 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           body: (state is SearchSuccess)
-              ? _BodySection(restaurants: state.data.restaurants)
-              : SizedBox(),
+              ? _BodySection(
+                  restaurants: state.data.restaurants,
+                  searchController: _searchController,
+                )
+              : (state is SearchFailure)
+                  ? EmptyListIllustration(
+                      desc: state.failureMessage,
+                      title: 'Oops, looks like something went wrong',
+                    )
+                  : const _SkeletonSection(),
         );
       },
     );

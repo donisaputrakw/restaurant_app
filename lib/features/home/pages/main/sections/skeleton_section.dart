@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:restaurant_app/core/core.dart';
+part of '../page.dart';
 
-class ListSkeleton extends StatelessWidget {
-  const ListSkeleton({super.key});
+class _SkeletonSection extends StatelessWidget {
+  const _SkeletonSection();
 
   @override
   Widget build(BuildContext context) {
