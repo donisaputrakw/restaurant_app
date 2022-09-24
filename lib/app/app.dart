@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:restaurant_app/app/config.dart';
 import 'package:restaurant_app/app/routes.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
+import 'package:restaurant_app/features/search/search.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -19,11 +21,22 @@ class App extends StatelessWidget {
       ),
     );
 
-    return MultiProvider(
+    return MultiBlocProvider(
         providers: [
-          ChangeNotifierProvider<RestaurantsProvider>(
-            create: (_) => RestaurantsProvider(
+          BlocProvider<RestaurantBloc>(
+            create: (BuildContext context) => RestaurantBloc(
               homeApiDataSource: HomeApiDataSourceImpl(),
+              networkInfo: NetworkInfoImpl(
+                connectionChecker: InternetConnectionChecker(),
+              ),
+            ),
+          ),
+          BlocProvider<SearchBloc>(
+            create: (BuildContext context) => SearchBloc(
+              searchApiDataSource: SearchApiDataSourceImpl(),
+              networkInfo: NetworkInfoImpl(
+                connectionChecker: InternetConnectionChecker(),
+              ),
             ),
           ),
         ],

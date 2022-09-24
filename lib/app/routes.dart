@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/auth/auth.dart';
 import 'package:restaurant_app/features/home/home.dart';
 import 'package:restaurant_app/features/restaurant/restaurant.dart';
@@ -14,13 +13,7 @@ class AppRouter {
         '/auth': (context) => const AuthPage(),
         '/register': (context) => const RegisterPage(),
         '/main': (context) => const MainPage(),
-        '/search': (context) => SearchPage(
-              restaurants: ModalRoute.of(context)?.settings.arguments
-                  as List<RestaurantModel>,
-            ),
-        '/restaurant': (context) => RestaurantPage(
-              restaurant:
-                  ModalRoute.of(context)?.settings.arguments as RestaurantModel,
-            ),
+        '/search': (context) => const SearchPage(),
+        '/restaurant': (context) => const RestaurantPage(),
       };
 }

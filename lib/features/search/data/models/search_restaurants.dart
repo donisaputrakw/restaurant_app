@@ -1,24 +1,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/core/core.dart';
 
-class RestaurantsModel extends Equatable {
-  const RestaurantsModel({
+class SearchRestaurantsModel extends Equatable {
+  const SearchRestaurantsModel({
     required this.error,
-    required this.message,
-    required this.count,
+    this.founded,
     required this.restaurants,
   });
 
   final bool error;
-  final String message;
-  final int count;
+  final int? founded;
   final List<Restaurant> restaurants;
 
-  factory RestaurantsModel.fromJson(Map<String, dynamic> json) =>
-      RestaurantsModel(
+  factory SearchRestaurantsModel.fromJson(Map<String, dynamic> json) =>
+      SearchRestaurantsModel(
         error: json['error'],
-        message: json['message'],
-        count: json['count'],
+        founded: json['founded'] ?? 0,
         restaurants: List<Restaurant>.from(
           json['restaurants'].map((x) => Restaurant.fromJson(x)),
         ),
@@ -26,11 +23,10 @@ class RestaurantsModel extends Equatable {
 
   Map<String, dynamic> toJson() => {
         'error': error,
-        'message': message,
-        'count': count,
+        'founded': founded,
         'restaurants': List<dynamic>.from(restaurants.map((x) => x.toJson())),
       };
 
   @override
-  List<Object?> get props => [error, message, count, restaurants];
+  List<Object?> get props => [error, founded, restaurants];
 }

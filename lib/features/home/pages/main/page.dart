@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
 
 part 'sections/all_restaurant_section.dart';
 part 'sections/populer_restaurant_section.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<RestaurantBloc>().add(FetchRestaurantEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Consumer<RestaurantsProvider>(
-      builder: (context, state, _) {
+    return BlocBuilder<RestaurantBloc, RestaurantState>(
+      builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             scrolledUnderElevation: 5,
@@ -24,7 +35,7 @@ class HomePage extends StatelessWidget {
                 child: SearchTextInput(
                   controller: TextEditingController(),
                   readOnly: true,
-                  onTap: (state.state == ResultState.hasData)
+                  onTap: (state is RestaurantSuccess)
                       ? () {
                           Navigator.pushNamed(
                             context,
@@ -37,12 +48,12 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          body: (state.state == ResultState.error)
+          body: (state is RestaurantFailure)
               ? EmptyListIllustration(
-                  desc: state.message,
+                  desc: state.failureMessage,
                   title: 'Oops, looks like something went wrong',
                 )
-              : (state.state == ResultState.hasData)
+              : (state is RestaurantSuccess)
                   ? ListView(
                       padding: const EdgeInsets.symmetric(
                         vertical: Dimens.defaultPadding,
@@ -55,7 +66,7 @@ class HomePage extends StatelessWidget {
                           child: Text('POPULAR', style: textTheme.subtitle1),
                         ),
                         _PopulerRestaurantSection(
-                          restaurants: state.result.restaurants,
+                          restaurants: state.data.restaurants,
                         ),
                         const SizedBox(height: Dimens.dp16),
                         Padding(
@@ -69,14 +80,12 @@ class HomePage extends StatelessWidget {
                         ),
                         const SizedBox(height: Dimens.dp16),
                         _AllRestaurantSection(
-                          restaurants: state.result.restaurants,
+                          restaurants: state.data.restaurants,
                         ),
                         const SizedBox(height: Dimens.dp32),
                       ],
                     )
-                  : (state.state == ResultState.noData)
-                      ? const SizedBox()
-                      : const ListSkeleton(),
+                  : const ListSkeleton(),
         );
       },
     );

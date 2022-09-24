@@ -2,7 +2,7 @@ part of '../page.dart';
 
 class _BodySection extends StatelessWidget {
   const _BodySection({required this.restaurants});
-  final List<RestaurantModel> restaurants;
+  final List<Restaurant> restaurants;
 
   @override
   Widget build(BuildContext context) {

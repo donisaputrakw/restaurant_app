@@ -2,7 +2,7 @@ part of '../page.dart';
 
 class _HeadingSection extends StatelessWidget {
   const _HeadingSection({required this.restaurant});
-  final RestaurantModel restaurant;
+  final Restaurant restaurant;
 
   @override
   Widget build(BuildContext context) {

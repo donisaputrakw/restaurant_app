@@ -6,8 +6,7 @@ part 'sections/drinks_section.dart';
 part 'sections/foods_section.dart';
 
 class RestaurantPage extends StatelessWidget {
-  const RestaurantPage({super.key, required this.restaurant});
-  final RestaurantModel restaurant;
+  const RestaurantPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,15 @@ class RestaurantPage extends StatelessWidget {
       ),
       body: CustomScrollView(slivers: [
         SliverToBoxAdapter(
-          child: _HeadingSection(restaurant: restaurant),
+          child: _HeadingSection(
+              restaurant: Restaurant(
+            city: '',
+            description: '',
+            id: '',
+            name: '',
+            pictureId: '',
+            rating: 0,
+          )),
         ),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -38,8 +45,8 @@ class RestaurantPage extends StatelessWidget {
                     ),
                     body: TabBarView(
                       children: <Widget>[
-                        _FoodsSection(foods: restaurant.menus.foods),
-                        _DricksSection(drinks: restaurant.menus.drinks),
+                        // _FoodsSection(foods: restaurant.menus.foods),
+                        // _DricksSection(drinks: restaurant.menus.drinks),
                       ],
                     ),
                   ),
