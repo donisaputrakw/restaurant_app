@@ -1,2 +1,2 @@
-export 'favorite/page.dart';
-export 'main/page.dart';
+export 'index/page.dart';
+export 'menu/page.dart';

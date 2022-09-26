@@ -14,6 +14,8 @@ class AppRouter {
         '/register': (context) => const RegisterPage(),
         '/main': (context) => const MainPage(),
         '/search': (context) => const SearchPage(),
-        '/restaurant': (context) => const RestaurantPage(),
+        '/restaurant': (context) => RestaurantPage(
+              id: ModalRoute.of(context)?.settings.arguments as String,
+            ),
       };
 }

@@ -104,9 +104,7 @@ class RegularInput extends StatelessWidget {
               counterText: '',
               fillColor: background ?? disabledColor?.withOpacity(0.2),
               hintText: hintText ?? '',
-              hintStyle: TextStyle(
-                color: textColor,
-              ),
+              hintStyle: TextStyle(color: textColor),
               errorText: errorText,
               suffixIcon: suffix,
             ),

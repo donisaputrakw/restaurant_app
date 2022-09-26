@@ -7,6 +7,7 @@ import 'package:restaurant_app/app/config.dart';
 import 'package:restaurant_app/app/routes.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
+import 'package:restaurant_app/features/restaurant/restaurant.dart';
 import 'package:restaurant_app/features/search/search.dart';
 
 class App extends StatelessWidget {
@@ -34,6 +35,14 @@ class App extends StatelessWidget {
           BlocProvider<SearchBloc>(
             create: (BuildContext context) => SearchBloc(
               searchApiDataSource: SearchApiDataSourceImpl(),
+              networkInfo: NetworkInfoImpl(
+                connectionChecker: InternetConnectionChecker(),
+              ),
+            ),
+          ),
+          BlocProvider<DetailRestaurantBloc>(
+            create: (BuildContext context) => DetailRestaurantBloc(
+              detailApiDataSource: DetailApiDataSourceImpl(),
               networkInfo: NetworkInfoImpl(
                 connectionChecker: InternetConnectionChecker(),
               ),
@@ -71,34 +80,34 @@ class App extends StatelessWidget {
                 horizontal: Dimens.dp16,
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
                 borderSide: BorderSide(color: AppColors.primaryColor),
               ),
               disabledBorder: OutlineInputBorder(
                 borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.primaryColor,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Theme.of(context).errorColor,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
               ),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Theme.of(context).errorColor,
                 ),
-                borderRadius: BorderRadius.circular(Dimens.dp32),
+                borderRadius: BorderRadius.circular(Dimens.dp8),
               ),
             ),
             scaffoldBackgroundColor: Colors.white,
@@ -118,10 +127,7 @@ class App extends StatelessWidget {
                   vertical: Dimens.dp12,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Dimens.dp50),
-                ),
-                side: BorderSide(
-                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(Dimens.dp8),
                 ),
               ),
             ),

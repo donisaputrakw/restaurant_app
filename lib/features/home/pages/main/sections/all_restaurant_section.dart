@@ -20,14 +20,15 @@ class _AllRestaurantSection extends StatelessWidget {
           .map(
             (e) => CardItem(
               city: e.city,
-              imageUrl: 'https://restaurant-api.dicoding.dev/images/medium/${e.pictureId}',
+              imageUrl:
+                  'https://restaurant-api.dicoding.dev/images/medium/${e.pictureId}',
               name: e.name,
               rate: e.rating.toString(),
               onTap: () {
                 Navigator.pushNamed(
                   context,
                   '/restaurant',
-                  arguments: e,
+                  arguments: e.id,
                 );
               },
             ),

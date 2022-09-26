@@ -26,7 +26,7 @@ class _PopulerRestaurantSection extends StatelessWidget {
             Navigator.pushNamed(
               context,
               '/restaurant',
-              arguments: populers[index],
+              arguments: populers[index].id,
             );
           },
         ),

@@ -49,44 +49,49 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          body: (state is RestaurantFailure)
-              ? EmptyListIllustration(
-                  desc: state.failureMessage,
-                  title: 'Oops, looks like something went wrong',
-                )
-              : (state is RestaurantSuccess)
-                  ? ListView(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: Dimens.defaultPadding,
-                      ),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Dimens.defaultPadding,
+          body: RefreshIndicator(
+            onRefresh: () async {
+              context.read<RestaurantBloc>().add(FetchRestaurantEvent());
+            },
+            child: (state is RestaurantFailure)
+                ? EmptyListIllustration(
+                    desc: state.failureMessage,
+                    title: 'Oops, looks like something went wrong',
+                  )
+                : (state is RestaurantSuccess)
+                    ? ListView(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Dimens.defaultPadding,
+                        ),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Dimens.defaultPadding,
+                            ),
+                            child: Text('POPULAR', style: textTheme.subtitle1),
                           ),
-                          child: Text('POPULAR', style: textTheme.subtitle1),
-                        ),
-                        _PopulerRestaurantSection(
-                          restaurants: state.data.restaurants,
-                        ),
-                        const SizedBox(height: Dimens.dp16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Dimens.defaultPadding,
+                          _PopulerRestaurantSection(
+                            restaurants: state.data.restaurants,
                           ),
-                          child: Text(
-                            'ALL RESTAURANT',
-                            style: textTheme.subtitle1,
+                          const SizedBox(height: Dimens.dp16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Dimens.defaultPadding,
+                            ),
+                            child: Text(
+                              'ALL RESTAURANT',
+                              style: textTheme.subtitle1,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: Dimens.dp16),
-                        _AllRestaurantSection(
-                          restaurants: state.data.restaurants,
-                        ),
-                        const SizedBox(height: Dimens.dp32),
-                      ],
-                    )
-                  : const _SkeletonSection(),
+                          const SizedBox(height: Dimens.dp16),
+                          _AllRestaurantSection(
+                            restaurants: state.data.restaurants,
+                          ),
+                          const SizedBox(height: Dimens.dp32),
+                        ],
+                      )
+                    : const _SkeletonSection(),
+          ),
         );
       },
     );

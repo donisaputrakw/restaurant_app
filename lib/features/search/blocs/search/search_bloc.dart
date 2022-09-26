@@ -11,7 +11,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     required this.searchApiDataSource,
     required this.networkInfo,
   }) : super(SearchInitial()) {
-    on<SearchRestaurantEvent>(_searchRestaurant);
+    on<SearchRestaurantEvent>(
+      _searchRestaurant,
+      transformer: debounce(const Duration(milliseconds: 300)),
+    );
   }
 
   final SearchApiDataSource searchApiDataSource;

@@ -2,7 +2,7 @@ part of '../page.dart';
 
 class _HeadingSection extends StatelessWidget {
   const _HeadingSection({required this.restaurant});
-  final Restaurant restaurant;
+  final RestaurantX restaurant;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class _HeadingSection extends StatelessWidget {
     return Column(
       children: [
         SmartNetworkImage(
-          restaurant.pictureId,
+          'https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}',
           height: Dimens.dp175,
           width: double.infinity,
           fit: BoxFit.cover,
@@ -18,7 +18,7 @@ class _HeadingSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Dimens.defaultPadding),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(restaurant.name, style: textTheme.headline3),
               Text(restaurant.city, style: textTheme.subtitle2),
@@ -36,6 +36,23 @@ class _HeadingSection extends StatelessWidget {
               ),
               const SizedBox(height: Dimens.defaultPadding),
               Text(restaurant.description, style: textTheme.bodyLarge),
+              const SizedBox(height: Dimens.defaultPadding),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MenuPage(
+                        menus: restaurant.menus,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'MENU',
+                  style: textTheme.subtitle2?.copyWith(color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),

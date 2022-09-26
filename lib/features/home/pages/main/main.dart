@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/features/favorite/favorite.dart';
 import 'package:restaurant_app/features/home/home.dart';
-import 'package:restaurant_app/features/restaurant/restaurant.dart';
 import 'package:restaurant_app/features/settings/settings.dart';
 
 class MainPage extends StatefulWidget {
