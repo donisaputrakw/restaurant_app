@@ -9,7 +9,10 @@ class _AllRestaurantSection extends StatelessWidget {
   Widget build(BuildContext context) {
     restaurants.sort((a, b) => a.id.compareTo(b.id));
     return GridView.count(
-      padding: const EdgeInsets.symmetric(horizontal: Dimens.defaultPadding),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimens.defaultPadding,
+        vertical: Dimens.dp4,
+      ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: Dimens.defaultPadding,

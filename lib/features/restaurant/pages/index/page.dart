@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/restaurant/restaurant.dart';
 import 'package:restaurant_app/l10n/l10n.dart';
@@ -21,6 +22,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
   late bool _loadingDialogIsOpen = false;
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
   void initState() {
@@ -38,6 +40,14 @@ class _RestaurantPageState extends State<RestaurantPage> {
     context.read<DetailRestaurantBloc>().add(
           FetchDetailRestaurantEvent(id: widget.id),
         );
+  }
+
+  Future<void> _createNotification(String title, String body) async {
+    await _notificationHelper.showNotification(
+      FlutterLocalNotificationsPlugin(),
+      title: title,
+      body: body,
+    );
   }
 
   @override
@@ -85,6 +95,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
           child: BlocBuilder<DetailRestaurantBloc, DetailRestaurantState>(
             builder: (context, state) {
               if (state is DetailRestaurantSuccess) {
+                _createNotification(
+                  '${context.l10n.welcomeIn} ${state.data.restaurant.name}',
+                  '${context.l10n.goTo} ${state.data.restaurant.city}',
+                );
                 return CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
