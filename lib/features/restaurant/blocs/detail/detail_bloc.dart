@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/core/core.dart';
@@ -11,13 +9,13 @@ part 'detail_state.dart';
 class DetailRestaurantBloc
     extends Bloc<DetailRestaurantEvent, DetailRestaurantState> {
   DetailRestaurantBloc({
-    required this.detailApiDataSource,
+    required this.restaurantApiDataSource,
     required this.networkInfo,
   }) : super(DetailRestaurantInitial()) {
     on<FetchDetailRestaurantEvent>(_fetchDetailRestaurants);
   }
 
-  final DetailApiDataSource detailApiDataSource;
+  final RestaurantApiDataSource restaurantApiDataSource;
   final NetworkInfo networkInfo;
 
   Future _fetchDetailRestaurants(
@@ -27,8 +25,7 @@ class DetailRestaurantBloc
     try {
       emit(DetailRestaurantLoading());
       final result =
-          await detailApiDataSource.fetchDetailRestaurant(id: event.id);
-      log(result.toString());
+          await restaurantApiDataSource.fetchDetailRestaurant(id: event.id);
       if (result.error) {
         emit(DetailRestaurantFailure(result.message));
       } else {

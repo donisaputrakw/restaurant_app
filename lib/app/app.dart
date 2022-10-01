@@ -30,7 +30,7 @@ class App extends StatelessWidget {
               networkInfo: NetworkInfoImpl(
                 connectionChecker: InternetConnectionChecker(),
               ),
-            ),
+            )..add(FetchRestaurantEvent()),
           ),
           BlocProvider<SearchBloc>(
             create: (BuildContext context) => SearchBloc(
@@ -42,7 +42,15 @@ class App extends StatelessWidget {
           ),
           BlocProvider<DetailRestaurantBloc>(
             create: (BuildContext context) => DetailRestaurantBloc(
-              detailApiDataSource: DetailApiDataSourceImpl(),
+              restaurantApiDataSource: RestaurantApiDataSourceImpl(),
+              networkInfo: NetworkInfoImpl(
+                connectionChecker: InternetConnectionChecker(),
+              ),
+            ),
+          ),
+          BlocProvider<ReviewBloc>(
+            create: (BuildContext context) => ReviewBloc(
+              restaurantApiDataSource: RestaurantApiDataSourceImpl(),
               networkInfo: NetworkInfoImpl(
                 connectionChecker: InternetConnectionChecker(),
               ),

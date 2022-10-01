@@ -29,8 +29,8 @@ class DetailRestaurantFailure extends DetailRestaurantState {
   List<Object> get props => [failureMessage];
 }
 
-class NotConnected extends DetailRestaurantState {
-  const NotConnected(this.failureMessage);
+class NotConnectedDetail extends DetailRestaurantState {
+  const NotConnectedDetail(this.failureMessage);
 
   final String failureMessage;
 

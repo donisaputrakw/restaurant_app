@@ -38,8 +38,11 @@ class _BodySection extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/restaurant',
-                              arguments: e);
+                          Navigator.pushNamed(
+                            context,
+                            '/restaurant',
+                            arguments: e.id,
+                          );
                         },
                       ),
                     )

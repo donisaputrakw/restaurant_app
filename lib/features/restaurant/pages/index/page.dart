@@ -21,13 +21,24 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
+  late bool _loadingDialogIsOpen = false;
 
   @override
   void initState() {
+    _fetchData();
+    _nameController.addListener(() {
+      setState(() {});
+    });
+    _descController.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  void _fetchData() {
     context.read<DetailRestaurantBloc>().add(
           FetchDetailRestaurantEvent(id: widget.id),
         );
-    super.initState();
   }
 
   @override
@@ -42,42 +53,90 @@ class _RestaurantPageState extends State<RestaurantPage> {
                 FetchDetailRestaurantEvent(id: widget.id),
               );
         },
-        child: BlocBuilder<DetailRestaurantBloc, DetailRestaurantState>(
-          builder: (context, state) {
-            if (state is DetailRestaurantSuccess) {
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: _HeadingSection(
-                      restaurant: state.data.restaurant,
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: _CustomerReviewSection(
-                      reviews: state.data.restaurant.customerReviews,
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: _ReviewSection(
-                      descController: _descController,
-                      nameController: _nameController,
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
+        child: BlocListener<ReviewBloc, ReviewState>(
+          listener: (context, state) {
+            if (state is ReviewLoading) {
+              setState(() {
+                _loadingDialogIsOpen = true;
+              });
+              IndicatorsUtils.showDialogLoading(context).whenComplete(() {
+                setState(() {
+                  _loadingDialogIsOpen = false;
+                });
+              });
+            } else if (state is ReviewSuccess) {
+              _nameController.clear();
+              _descController.clear();
+              _dismissDialog();
+              _fetchData();
+            } else if (state is ReviewFailure) {
+              _dismissDialog();
+              IndicatorsUtils.showErrorSnackBar(
+                context,
+                state.failureMessage,
               );
-            } else if (state is DetailRestaurantFailure) {
-              return EmptyListIllustration(
-                desc: state.failureMessage,
-                title: 'Oops, looks like something went wrong',
-              );
-            } else {
-              return const _SkeletonSection();
             }
           },
+          child: BlocBuilder<DetailRestaurantBloc, DetailRestaurantState>(
+            builder: (context, state) {
+              if (state is DetailRestaurantSuccess) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: _HeadingSection(
+                        restaurant: state.data.restaurant,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _CustomerReviewSection(
+                        reviews: state.data.restaurant.customerReviews,
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _ReviewSection(
+                        descController: _descController,
+                        nameController: _nameController,
+                        onPressed: (_nameController.text.isNotEmpty &&
+                                _descController.text.isNotEmpty)
+                            ? () {
+                                context.read<ReviewBloc>().add(
+                                      SendReview(
+                                        request: ReviewRequest(
+                                          id: widget.id,
+                                          name: _nameController.text,
+                                          review: _descController.text,
+                                        ),
+                                      ),
+                                    );
+                              }
+                            : null,
+                      ),
+                    ),
+                  ],
+                );
+              } else if (state is DetailRestaurantFailure) {
+                return EmptyListIllustration(
+                  desc: state.failureMessage,
+                  title: 'Oops, looks like something went wrong',
+                );
+              } else {
+                return const _SkeletonSection();
+              }
+            },
+          ),
         ),
       ),
     );
+  }
+
+  void _dismissDialog() {
+    if (_loadingDialogIsOpen) {
+      Navigator.of(context).pop();
+    }
+
+    setState(() {
+      _loadingDialogIsOpen = false;
+    });
   }
 
   @override

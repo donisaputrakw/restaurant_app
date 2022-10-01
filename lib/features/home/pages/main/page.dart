@@ -7,19 +7,8 @@ part 'sections/all_restaurant_section.dart';
 part 'sections/populer_restaurant_section.dart';
 part 'sections/skeleton_section.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    context.read<RestaurantBloc>().add(FetchRestaurantEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +27,7 @@ class _HomePageState extends State<HomePage> {
                   readOnly: true,
                   onTap: (state is RestaurantSuccess)
                       ? () {
-                          Navigator.pushNamed(
-                            context,
-                            '/search',
-                          );
+                          Navigator.pushNamed(context, '/search');
                         }
                       : null,
                   hintText: 'Search',

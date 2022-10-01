@@ -29,8 +29,8 @@ class RestaurantFailure extends RestaurantState {
   List<Object> get props => [failureMessage];
 }
 
-class NotConnected extends RestaurantState {
-  const NotConnected(this.failureMessage);
+class NotConnectedHome extends RestaurantState {
+  const NotConnectedHome(this.failureMessage);
 
   final String failureMessage;
 
