@@ -62,7 +62,17 @@ class _SearchPageState extends State<SearchPage> {
                       desc: state.failureMessage,
                       title: 'Oops, looks like something went wrong',
                     )
-                  : const _SkeletonSection(),
+                  : (state is NotConnectedSearch)
+                      ? NotConnectedIllustration(
+                          onRefresh: () {
+                            context.read<SearchBloc>().add(
+                                  SearchRestaurantEvent(
+                                    query: _searchController.text,
+                                  ),
+                                );
+                          },
+                        )
+                      : const _SkeletonSection(),
         );
       },
     );

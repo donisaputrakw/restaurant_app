@@ -22,14 +22,19 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
     Emitter<ReviewState> emit,
   ) async {
     try {
-      emit(ReviewLoading());
-      final result = await restaurantApiDataSource.sendReview(
-        request: event.request,
-      );
-      if (result.error) {
-        emit(ReviewFailure(result.message));
+      final isConnected = await networkInfo.isConnected;
+      if (isConnected) {
+        emit(ReviewLoading());
+        final result = await restaurantApiDataSource.sendReview(
+          request: event.request,
+        );
+        if (result.error) {
+          emit(ReviewFailure(result.message));
+        } else {
+          emit(ReviewSuccess());
+        }
       } else {
-        emit(ReviewSuccess());
+        emit(const NotConnectedReview('Tidak ada koneksi internet'));
       }
     } catch (exception, stackTrace) {
       emit(

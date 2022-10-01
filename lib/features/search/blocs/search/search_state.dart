@@ -29,8 +29,8 @@ class SearchFailure extends SearchState {
   List<Object> get props => [failureMessage];
 }
 
-class NotConnected extends SearchState {
-  const NotConnected(this.failureMessage);
+class NotConnectedSearch extends SearchState {
+  const NotConnectedSearch(this.failureMessage);
 
   final String failureMessage;
 

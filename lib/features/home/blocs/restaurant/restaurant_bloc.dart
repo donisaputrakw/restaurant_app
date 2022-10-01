@@ -22,12 +22,18 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
     Emitter<RestaurantState> emit,
   ) async {
     try {
-      emit(RestaurantLoading());
-      final result = await homeApiDataSource.fetchRestaurants();
-      if (result.error) {
-        emit(RestaurantFailure(result.message));
+      final isConnected = await networkInfo.isConnected;
+      if (isConnected) {
+        emit(RestaurantLoading());
+        final result = await homeApiDataSource.fetchRestaurants();
+        if (result.error) {
+          emit(RestaurantFailure(result.message));
+        } else {
+          emit(RestaurantSuccess(data: result));
+        }
       } else {
-        emit(RestaurantSuccess(data: result));
+        emit(const NotConnectedHome(
+            'silahkan periksa konesi internet kamu terlebih dahulu, jika sudah silahkan coba kembali'));
       }
     } catch (exception, stackTrace) {
       emit(

@@ -23,13 +23,19 @@ class DetailRestaurantBloc
     Emitter<DetailRestaurantState> emit,
   ) async {
     try {
-      emit(DetailRestaurantLoading());
-      final result =
-          await restaurantApiDataSource.fetchDetailRestaurant(id: event.id);
-      if (result.error) {
-        emit(DetailRestaurantFailure(result.message));
+      final isConnected = await networkInfo.isConnected;
+      if (isConnected) {
+        emit(DetailRestaurantLoading());
+        final result =
+            await restaurantApiDataSource.fetchDetailRestaurant(id: event.id);
+        if (result.error) {
+          emit(DetailRestaurantFailure(result.message));
+        } else {
+          emit(DetailRestaurantSuccess(data: result));
+        }
       } else {
-        emit(DetailRestaurantSuccess(data: result));
+        emit(const NotConnectedDetail(
+            'silahkan periksa konesi internet kamu terlebih dahulu, jika sudah silahkan coba kembali'));
       }
     } catch (exception, stackTrace) {
       emit(

@@ -75,6 +75,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
                 context,
                 state.failureMessage,
               );
+            } else if (state is NotConnectedReview) {
+              _dismissDialog();
+              IndicatorsUtils.showErrorSnackBar(
+                context,
+                state.failureMessage,
+              );
             }
           },
           child: BlocBuilder<DetailRestaurantBloc, DetailRestaurantState>(
@@ -119,6 +125,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
                   desc: state.failureMessage,
                   title: 'Oops, looks like something went wrong',
                 );
+              } else if (state is NotConnectedDetail) {
+                return NotConnectedIllustration(onRefresh: _fetchData);
               } else {
                 return const _SkeletonSection();
               }

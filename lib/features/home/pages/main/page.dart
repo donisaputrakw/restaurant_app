@@ -15,70 +15,79 @@ class HomePage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return BlocBuilder<RestaurantBloc, RestaurantState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            scrolledUnderElevation: 5,
-            toolbarHeight: 80,
-            flexibleSpace: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(Dimens.defaultPadding),
-                child: SearchTextInput(
-                  controller: TextEditingController(),
-                  readOnly: true,
-                  onTap: (state is RestaurantSuccess)
-                      ? () {
-                          Navigator.pushNamed(context, '/search');
-                        }
-                      : null,
-                  hintText: 'Search',
+        if (state is NotConnectedHome) {
+          return NotConnectedIllustration(
+            onRefresh: () {
+              context.read<RestaurantBloc>().add(FetchRestaurantEvent());
+            },
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              scrolledUnderElevation: 5,
+              toolbarHeight: 80,
+              flexibleSpace: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimens.defaultPadding),
+                  child: SearchTextInput(
+                    controller: TextEditingController(),
+                    readOnly: true,
+                    onTap: (state is RestaurantSuccess)
+                        ? () {
+                            Navigator.pushNamed(context, '/search');
+                          }
+                        : null,
+                    hintText: 'Search',
+                  ),
                 ),
               ),
             ),
-          ),
-          body: RefreshIndicator(
-            onRefresh: () async {
-              context.read<RestaurantBloc>().add(FetchRestaurantEvent());
-            },
-            child: (state is RestaurantFailure)
-                ? EmptyListIllustration(
-                    desc: state.failureMessage,
-                    title: 'Oops, looks like something went wrong',
-                  )
-                : (state is RestaurantSuccess)
-                    ? ListView(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Dimens.defaultPadding,
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: Dimens.defaultPadding,
+            body: RefreshIndicator(
+              onRefresh: () async {
+                context.read<RestaurantBloc>().add(FetchRestaurantEvent());
+              },
+              child: (state is RestaurantFailure)
+                  ? EmptyListIllustration(
+                      desc: state.failureMessage,
+                      title: 'Oops, looks like something went wrong',
+                    )
+                  : (state is RestaurantSuccess)
+                      ? ListView(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: Dimens.defaultPadding,
+                          ),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: Dimens.defaultPadding,
+                              ),
+                              child: Text('RESTORAN POPULER',
+                                  style: textTheme.subtitle1),
                             ),
-                            child: Text('POPULAR', style: textTheme.subtitle1),
-                          ),
-                          _PopulerRestaurantSection(
-                            restaurants: state.data.restaurants,
-                          ),
-                          const SizedBox(height: Dimens.dp16),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: Dimens.defaultPadding,
+                            _PopulerRestaurantSection(
+                              restaurants: state.data.restaurants,
                             ),
-                            child: Text(
-                              'ALL RESTAURANT',
-                              style: textTheme.subtitle1,
+                            const SizedBox(height: Dimens.dp16),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: Dimens.defaultPadding,
+                              ),
+                              child: Text(
+                                'SEMUA RESTORAN',
+                                style: textTheme.subtitle1,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: Dimens.dp16),
-                          _AllRestaurantSection(
-                            restaurants: state.data.restaurants,
-                          ),
-                          const SizedBox(height: Dimens.dp32),
-                        ],
-                      )
-                    : const _SkeletonSection(),
-          ),
-        );
+                            const SizedBox(height: Dimens.dp16),
+                            _AllRestaurantSection(
+                              restaurants: state.data.restaurants,
+                            ),
+                            const SizedBox(height: Dimens.dp32),
+                          ],
+                        )
+                      : const _SkeletonSection(),
+            ),
+          );
+        }
       },
     );
   }

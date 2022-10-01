@@ -25,26 +25,32 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) async {
     try {
-      emit(SearchLoading());
-      if (event.query == '') {
-        emit(
-          const SearchSuccess(
-            data: SearchRestaurantsModel(
-              error: false,
-              restaurants: [],
-              founded: 0,
+      final isConnected = await networkInfo.isConnected;
+      if (isConnected) {
+        emit(SearchLoading());
+        if (event.query == '') {
+          emit(
+            const SearchSuccess(
+              data: SearchRestaurantsModel(
+                error: false,
+                restaurants: [],
+                founded: 0,
+              ),
             ),
-          ),
-        );
-      } else {
-        final result = await searchApiDataSource.searchRestaurants(
-          query: event.query,
-        );
-        if (result.error) {
-          emit(const SearchFailure('Data not found'));
+          );
         } else {
-          emit(SearchSuccess(data: result));
+          final result = await searchApiDataSource.searchRestaurants(
+            query: event.query,
+          );
+          if (result.error) {
+            emit(const SearchFailure('Data not found'));
+          } else {
+            emit(SearchSuccess(data: result));
+          }
         }
+      } else {
+        emit(const NotConnectedSearch(
+            'silahkan periksa konesi internet kamu terlebih dahulu, jika sudah silahkan coba kembali'));
       }
     } catch (exception, stackTrace) {
       emit(
