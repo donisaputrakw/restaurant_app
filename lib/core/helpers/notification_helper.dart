@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/core/core.dart';
@@ -51,7 +52,9 @@ class NotificationHelper {
       onDidReceiveNotificationResponse: (NotificationResponse details) async {
         final payload = details.payload;
         if (payload != null) {
-          print('notification payload: $payload');
+          if (kDebugMode) {
+            print('notification payload: $payload');
+          }
         }
         selectNotificationSubject.add(payload);
       },
