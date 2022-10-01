@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/all_restaurant_section.dart';
 part 'sections/populer_restaurant_section.dart';
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
                             Navigator.pushNamed(context, '/search');
                           }
                         : null,
-                    hintText: 'Search',
+                    hintText: context.l10n.search,
                   ),
                 ),
               ),
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
               child: (state is RestaurantFailure)
                   ? EmptyListIllustration(
                       desc: state.failureMessage,
-                      title: 'Oops, looks like something went wrong',
+                      title: context.l10n.titleSomethongWrong,
                     )
                   : (state is RestaurantSuccess)
                       ? ListView(
@@ -61,8 +62,10 @@ class HomePage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                 horizontal: Dimens.defaultPadding,
                               ),
-                              child: Text('RESTORAN POPULER',
-                                  style: textTheme.subtitle1),
+                              child: Text(
+                                context.l10n.popular.toUpperCase(),
+                                style: textTheme.subtitle1,
+                              ),
                             ),
                             _PopulerRestaurantSection(
                               restaurants: state.data.restaurants,
@@ -73,7 +76,7 @@ class HomePage extends StatelessWidget {
                                 horizontal: Dimens.defaultPadding,
                               ),
                               child: Text(
-                                'SEMUA RESTORAN',
+                                context.l10n.allRestaurant.toUpperCase(),
                                 style: textTheme.subtitle1,
                               ),
                             ),

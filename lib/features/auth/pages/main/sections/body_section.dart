@@ -24,7 +24,7 @@ class _BodySection extends StatelessWidget {
           ),
         ),
         Text(
-          'Login Form',
+          context.l10n.formLogin,
           style: textTheme.headline3?.copyWith(
             color: Colors.white,
           ),
@@ -49,13 +49,13 @@ class _BodySection extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            text: 'Don\'t have an account?',
+            text: context.l10n.notRegistered,
             style: textTheme.subtitle2?.copyWith(
               color: Colors.white,
             ),
             children: <TextSpan>[
               TextSpan(
-                text: ' Register',
+                text: context.l10n.register,
                 style: textTheme.subtitle2?.copyWith(
                   color: AppColors.blue,
                 ),

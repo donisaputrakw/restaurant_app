@@ -18,18 +18,18 @@ class _ReviewSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Submit Review',
+            context.l10n.submitReview,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           const SizedBox(height: Dimens.dp8),
           RegularInput(
             controller: nameController,
-            hintText: 'Name',
+            hintText: context.l10n.name,
           ),
           const SizedBox(height: Dimens.dp8),
           RegularInput(
             controller: descController,
-            hintText: 'Description',
+            hintText: context.l10n.description,
             minLine: 3,
             maxLine: 3,
           ),
@@ -37,7 +37,7 @@ class _ReviewSection extends StatelessWidget {
           ElevatedButton(
             onPressed: onPressed,
             child: Text(
-              'SUBMIT',
+              context.l10n.submit.toUpperCase(),
               style: Theme.of(context).textTheme.subtitle2?.copyWith(
                     color: Colors.white,
                   ),

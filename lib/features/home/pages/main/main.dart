@@ -3,6 +3,7 @@ import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/favorite/favorite.dart';
 import 'package:restaurant_app/features/home/home.dart';
 import 'package:restaurant_app/features/settings/settings.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -34,18 +35,18 @@ class _MainPageState extends State<MainPage> {
             _index = v;
           });
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            label: 'Home',
-            icon: Icon(Icons.home_rounded),
+            label: context.l10n.home,
+            icon: const Icon(Icons.home_rounded),
           ),
           BottomNavigationBarItem(
-            label: 'Favorite',
-            icon: Icon(Icons.favorite),
+            label: context.l10n.favorite,
+            icon: const Icon(Icons.favorite),
           ),
           BottomNavigationBarItem(
-            label: 'Profile',
-            icon: Icon(Icons.person),
+            label: context.l10n.profile,
+            icon: const Icon(Icons.person),
           ),
         ],
       ),

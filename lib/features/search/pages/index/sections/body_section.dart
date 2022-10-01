@@ -12,9 +12,9 @@ class _BodySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return (searchController.text.isEmpty)
-        ? const EmptyListIllustration(
-            desc: 'let\'s find the restaurant you want right',
-            title: 'find a restaurant',
+        ? EmptyListIllustration(
+            desc: context.l10n.descFindRestaurant,
+            title: context.l10n.titleFindRestaurant,
           )
         : ((restaurants.isNotEmpty)
             ? ListView(
@@ -48,9 +48,9 @@ class _BodySection extends StatelessWidget {
                     )
                     .toList(),
               )
-            : const EmptyListIllustration(
-                desc: 'please check your spelling again or use another keyword',
-                title: 'Oops, restaurant was not found',
+            : EmptyListIllustration(
+                desc: context.l10n.descNotFoundRestaurant,
+                title: context.l10n.titleNotFoundRestaurant,
               ));
   }
 }

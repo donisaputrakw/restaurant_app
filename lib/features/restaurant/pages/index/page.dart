@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/restaurant/restaurant.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/heading_section.dart';
-part 'sections/drinks_section.dart';
-part 'sections/foods_section.dart';
 part 'sections/customer_review_section.dart';
 part 'sections/review_section.dart';
 part 'sections/skeleton_section.dart';
@@ -123,7 +122,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
               } else if (state is DetailRestaurantFailure) {
                 return EmptyListIllustration(
                   desc: state.failureMessage,
-                  title: 'Oops, looks like something went wrong',
+                  title: context.l10n.titleSomethongWrong,
                 );
               } else if (state is NotConnectedDetail) {
                 return NotConnectedIllustration(onRefresh: _fetchData);

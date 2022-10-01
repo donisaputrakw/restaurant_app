@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/app/config.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -60,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
               textAlign: TextAlign.center,
             ),
             Text(
-              'Rasa Enak, Harganya Lebih Enak!',
+              context.l10n.slug,
               style: textTheme.subtitle2?.copyWith(color: Colors.white),
               textAlign: TextAlign.center,
             ),

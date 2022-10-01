@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/drinks_section.dart';
 part 'sections/foods_section.dart';
@@ -17,15 +18,17 @@ class MenuPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                  child: Text(
-                'Foods',
-                style: Theme.of(context).textTheme.subtitle1,
-              )),
+                child: Text(
+                  context.l10n.foods,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
               Tab(
-                  child: Text(
-                'Drinks',
-                style: Theme.of(context).textTheme.subtitle1,
-              )),
+                child: Text(
+                  context.l10n.drinks,
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
             ],
           ),
         ),

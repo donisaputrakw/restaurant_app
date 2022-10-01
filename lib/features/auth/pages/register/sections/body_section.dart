@@ -26,7 +26,7 @@ class _BodySection extends StatelessWidget {
           ),
         ),
         Text(
-          'Registration Form',
+          context.l10n.formRegister,
           style: textTheme.headline3?.copyWith(
             color: Colors.white,
           ),
@@ -35,7 +35,7 @@ class _BodySection extends StatelessWidget {
         const SizedBox(height: Dimens.dp50),
         RegularInput(
           controller: nameController,
-          hintText: 'Name',
+          hintText: context.l10n.name,
           prefixIcon: Icons.person,
           inputType: TextInputType.name,
         ),
@@ -58,13 +58,13 @@ class _BodySection extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            text: 'Already have an account?',
+            text: context.l10n.registered,
             style: textTheme.subtitle2?.copyWith(
               color: Colors.white,
             ),
             children: <TextSpan>[
               TextSpan(
-                text: ' Login',
+                text: context.l10n.login,
                 style: textTheme.subtitle2?.copyWith(
                   color: AppColors.blue,
                 ),

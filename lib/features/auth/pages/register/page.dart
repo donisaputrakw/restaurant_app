@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/body_section.dart';
 
@@ -56,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   }
                 : null,
             child: Text(
-              'Register',
+              context.l10n.register,
               style: textTheme.subtitle2?.copyWith(
                 color: Colors.white,
               ),

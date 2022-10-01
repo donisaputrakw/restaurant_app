@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 class NotConnectedIllustration extends StatelessWidget {
   const NotConnectedIllustration({
@@ -23,12 +24,12 @@ class NotConnectedIllustration extends StatelessWidget {
             ),
             const SizedBox(height: Dimens.defaultPadding),
             Text(
-              'Ups, sepertinya koneksi internet kamu terputus',
+              context.l10n.titleNotConnected,
               style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
             Text(
-              'silahkan periksa konesi internet kamu terlebih dahulu, jika sudah silahkan coba kembali',
+              context.l10n.descNotConnected,
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
@@ -36,7 +37,7 @@ class NotConnectedIllustration extends StatelessWidget {
             ElevatedButton(
               onPressed: onRefresh,
               child: Text(
-                'COBA LAGI',
+                context.l10n.refresh.toUpperCase(),
                 style: Theme.of(context).textTheme.subtitle2?.copyWith(
                       color: Colors.white,
                     ),

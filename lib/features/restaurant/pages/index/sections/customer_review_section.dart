@@ -25,7 +25,10 @@ class _CustomerReviewSectionState extends State<_CustomerReviewSection> {
           Row(
             children: [
               Expanded(
-                child: Text('Customer Reviews', style: textTheme.subtitle1),
+                child: Text(
+                  context.l10n.customerReviews,
+                  style: textTheme.subtitle1,
+                ),
               ),
               InkWell(
                 borderRadius: BorderRadius.circular(Dimens.defaultPadding),
@@ -35,7 +38,7 @@ class _CustomerReviewSectionState extends State<_CustomerReviewSection> {
                   });
                 },
                 child: Text(
-                  (isHide) ? 'Show' : 'Hide',
+                  (isHide) ? context.l10n.show : context.l10n.hide,
                   style: textTheme.caption?.copyWith(color: AppColors.blue),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/core/core.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/body_section.dart';
 
@@ -50,7 +51,7 @@ class _AuthPageState extends State<AuthPage> {
                   }
                 : null,
             child: Text(
-              'Login',
+              context.l10n.login,
               style: textTheme.subtitle2?.copyWith(
                 color: Colors.white,
               ),

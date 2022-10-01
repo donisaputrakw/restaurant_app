@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/search/search.dart';
+import 'package:restaurant_app/l10n/l10n.dart';
 
 part 'sections/body_section.dart';
 part 'sections/skeleton_section.dart';
@@ -47,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
                 padding: const EdgeInsets.all(Dimens.defaultPadding),
                 child: SearchTextInput(
                   controller: _searchController,
-                  hintText: 'Search',
+                  hintText: context.l10n.search,
                 ),
               ),
             ),
@@ -60,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
               : (state is SearchFailure)
                   ? EmptyListIllustration(
                       desc: state.failureMessage,
-                      title: 'Oops, looks like something went wrong',
+                      title: context.l10n.titleSomethongWrong,
                     )
                   : (state is NotConnectedSearch)
                       ? NotConnectedIllustration(

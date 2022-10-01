@@ -49,7 +49,7 @@ class _HeadingSection extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  'MENU',
+                  context.l10n.menu.toUpperCase(),
                   style: textTheme.subtitle2?.copyWith(color: Colors.white),
                 ),
               ),
