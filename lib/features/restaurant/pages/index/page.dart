@@ -42,14 +42,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
         );
   }
 
-  Future<void> _createNotification(String title, String body) async {
-    await _notificationHelper.showNotification(
-      FlutterLocalNotificationsPlugin(),
-      title: title,
-      body: body,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,10 +87,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
           child: BlocBuilder<DetailRestaurantBloc, DetailRestaurantState>(
             builder: (context, state) {
               if (state is DetailRestaurantSuccess) {
-                _createNotification(
-                  '${context.l10n.welcomeIn} ${state.data.restaurant.name}',
-                  '${context.l10n.goTo} ${state.data.restaurant.city}',
-                );
                 return CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
