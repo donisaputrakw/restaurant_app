@@ -7,8 +7,6 @@ import 'package:restaurant_app/app/config.dart';
 import 'package:restaurant_app/app/routes.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
-import 'package:restaurant_app/features/restaurant/restaurant.dart';
-import 'package:restaurant_app/features/search/search.dart';
 import 'package:restaurant_app/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -32,30 +30,6 @@ class App extends StatelessWidget {
                 connectionChecker: InternetConnectionChecker(),
               ),
             )..add(FetchRestaurantEvent()),
-          ),
-          BlocProvider<SearchBloc>(
-            create: (BuildContext context) => SearchBloc(
-              searchApiDataSource: SearchApiDataSourceImpl(),
-              networkInfo: NetworkInfoImpl(
-                connectionChecker: InternetConnectionChecker(),
-              ),
-            ),
-          ),
-          BlocProvider<DetailRestaurantBloc>(
-            create: (BuildContext context) => DetailRestaurantBloc(
-              restaurantApiDataSource: RestaurantApiDataSourceImpl(),
-              networkInfo: NetworkInfoImpl(
-                connectionChecker: InternetConnectionChecker(),
-              ),
-            ),
-          ),
-          BlocProvider<ReviewBloc>(
-            create: (BuildContext context) => ReviewBloc(
-              restaurantApiDataSource: RestaurantApiDataSourceImpl(),
-              networkInfo: NetworkInfoImpl(
-                connectionChecker: InternetConnectionChecker(),
-              ),
-            ),
           ),
         ],
         child: MaterialApp(

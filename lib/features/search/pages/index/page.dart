@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/search/search.dart';
 import 'package:restaurant_app/l10n/l10n.dart';
@@ -7,14 +8,31 @@ import 'package:restaurant_app/l10n/l10n.dart';
 part 'sections/body_section.dart';
 part 'sections/skeleton_section.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SearchBloc(
+        searchApiDataSource: SearchApiDataSourceImpl(),
+        networkInfo: NetworkInfoImpl(
+          connectionChecker: InternetConnectionChecker(),
+        ),
+      ),
+      child: const SearchView(),
+    );
+  }
 }
 
-class _SearchPageState extends State<SearchPage> {
+class SearchView extends StatefulWidget {
+  const SearchView({super.key});
+
+  @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -22,16 +40,7 @@ class _SearchPageState extends State<SearchPage> {
     context.read<SearchBloc>().add(
           SearchRestaurantEvent(query: _searchController.text),
         );
-    _addListener();
     super.initState();
-  }
-
-  void _addListener() {
-    _searchController.addListener(
-      () => context.read<SearchBloc>().add(
-            SearchRestaurantEvent(query: _searchController.text),
-          ),
-    );
   }
 
   @override
@@ -49,6 +58,11 @@ class _SearchPageState extends State<SearchPage> {
                 child: SearchTextInput(
                   controller: _searchController,
                   hintText: context.l10n.search,
+                  onChanged: (value) {
+                    context.read<SearchBloc>().add(
+                          SearchRestaurantEvent(query: value),
+                        );
+                  },
                 ),
               ),
             ),

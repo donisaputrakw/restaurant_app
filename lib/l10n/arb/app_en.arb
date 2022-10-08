@@ -35,5 +35,12 @@
   "descNotFoundRestaurant": "please check your spelling again or use another keyword",
   "titleNotConnected": "Oops, your internet connection is lost",
   "descNotConnected": "please check your internet connection first, if you have please try again",
+  "languageDesc": "Available in Indonesian and English",
+  "restaurantNotification": "Restaurant Notification",
+  "enableNotification": "Enable Notification",
+  "successAdd": "Added Successfully!",
+  "successDelete": "Successfully Removed!",
+  "titleEmptyList": "Oops, there are no restaurants that you marked yet",
+  "descEmptyList": "Please add to favorites if you like it.",
   "titleSomethongWrong": "Oops, looks like something went wrong"
 }

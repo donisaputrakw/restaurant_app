@@ -75,7 +75,7 @@ class _ProfileViewState extends State<ProfileView> {
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                'Tersedia bahasa indonesia dan bahsasa inggris',
+                context.l10n.languageDesc,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
@@ -85,11 +85,11 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             ListTile(
               title: Text(
-                'Restaurant Notification',
+                context.l10n.restaurantNotification,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                'Enable Notification',
+                context.l10n.enableNotification,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               trailing: Switch(

@@ -1,3 +1,4 @@
+export 'cache/cache.dart';
 export 'components/components.dart';
 export 'data/data.dart';
 export 'helpers/helpers.dart';

@@ -44,6 +44,23 @@ class IndicatorsUtils {
     }
   }
 
+  static void showSuccessSnackBar(BuildContext context, String? message) {
+    if (message != null && message.isNotEmpty) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+    }
+  }
+
   static void hideCurrentSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()

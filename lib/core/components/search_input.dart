@@ -48,6 +48,7 @@ class SearchTextInput extends StatelessWidget {
       autoFocus: autoFocus,
       onSubmit: onSubmit,
       enable: enable,
+      inputType: TextInputType.name,
       suffix: controller.text.isNotEmpty
           ? IconButton(
               icon: const Icon(Icons.clear),

@@ -1,7 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:restaurant_app/core/cache/cache.dart';
 import 'package:restaurant_app/core/core.dart';
 
 part 'notification_event.dart';

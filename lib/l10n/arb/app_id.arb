@@ -35,5 +35,12 @@
   "descNotFoundRestaurant": "silakan periksa ejaan Anda lagi atau gunakan kata kunci lain",
   "titleNotConnected": "Ups, koneksi internet Anda terputus",
   "descNotConnected": "silahkan cek koneksi internet anda terlebih dahulu, jika ada silahkan coba lagi",
+  "languageDesc": "Tersedia bahasa indonesia dan bahsasa inggris",
+  "restaurantNotification": "Pemberitahuan Restoran",
+  "enableNotification": "Aktifkan Pemberitahuan",
+  "successAdd": "Berhasil ditambahkan!",
+  "successDelete": "Berhasil dihapus!",
+  "titleEmptyList": "Ups, belum ada restoran yg kamu tandai",
+  "descEmptyList": "Silahkan tambahkan ke favorit jika kamu menyukainya.",
   "titleSomethongWrong": "Oops, looks like something went wrong"
 }
