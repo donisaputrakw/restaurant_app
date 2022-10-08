@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:restaurant_app/app/config.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -12,7 +13,7 @@ final didReceiveLocalNotificationSubject =
 class NotificationHelper {
   static const _channelId = '01';
   static const _channelName = 'channel_01';
-  static const _channelDesc = 'dicoding channel';
+  static const _channelDesc = AppConfig.appName;
   static NotificationHelper? _instance;
 
   NotificationHelper._internal() {

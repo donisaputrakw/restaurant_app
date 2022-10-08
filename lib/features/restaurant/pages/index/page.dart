@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/restaurant/restaurant.dart';
 import 'package:restaurant_app/l10n/l10n.dart';
@@ -22,7 +21,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
   late bool _loadingDialogIsOpen = false;
-  final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
   void initState() {
