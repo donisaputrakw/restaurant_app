@@ -41,10 +41,9 @@ class _FavoriteViewState extends State<FavoriteView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Favorite',
+          context.l10n.favorite,
           style: Theme.of(context).textTheme.subtitle1,
         ),
-        centerTitle: true,
       ),
       body: BlocConsumer<FavoriteRestaurantsBloc, FavoriteRestaurantsState>(
         listener: (context, state) {
