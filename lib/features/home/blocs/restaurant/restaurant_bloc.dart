@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:http/http.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
 
@@ -25,7 +26,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       final isConnected = await networkInfo.isConnected;
       if (isConnected) {
         emit(RestaurantLoading());
-        final result = await homeApiDataSource.fetchRestaurants();
+        final result = await homeApiDataSource.fetchRestaurants(Client());
         if (result.error) {
           emit(RestaurantFailure(result.message));
         } else {

@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart';
 import 'package:restaurant_app/core/core.dart';
 import 'package:restaurant_app/features/home/home.dart';
 
@@ -30,7 +31,7 @@ class BackgroundService {
     final HomeApiDataSource homeApiDataSource = HomeApiDataSourceImpl();
     final NotificationHelper notificationHelper = NotificationHelper();
     log('Alarm fired!');
-    final result = await homeApiDataSource.fetchRestaurants();
+    final result = await homeApiDataSource.fetchRestaurants(Client());
     final list = result.restaurants;
     list.shuffle();
     await notificationHelper.showNotification(
